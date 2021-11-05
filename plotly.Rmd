@@ -1,0 +1,25 @@
+---
+title: "Plotly"
+output: html_document
+---
+
+# Examples of Plotly
+
+## Scatterplot
+ 
+Install Instacart Data
+```{r}
+library(tidyverse)
+library(p8105.datasets)
+library(dplyr)
+library(tidyr)
+data("instacart")
+library(plotly)
+```
+
+```{r}
+instacart =
+  instacart %>% 
+  plot_ly(x = ~product_name, y = ~order_number, type = "scatter", mode = "markers")
+```
+

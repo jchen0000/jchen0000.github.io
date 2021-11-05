@@ -1,0 +1,34 @@
+---
+title: "Jiaqi Chen"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean
+---
+
+Graduate Student at MS Biostatistics Program <br>
+Columbia University Mailman School of Public Health 
+
+<br>
+
+<img src="images/1.jpeg" style="width:75%; border:8px solid">
+
+<br>
+
+# Know More About Me
+
+I’m currently a first-year student in MS biostatistics program on theory and method track. I’m taking a few data-analysis related courses such as data science and biostatistical methods. By taking these courses, I’ve learned data entry and data management using R. In addition to schoolwork, I work at ICAP at Columbia university as a program assistant. I mainly provide administrative support for ICAP systems and assist with data cleaning, entry, and document migration.
+
+
+# Academic and Professional Experience
+[Resume](Resume.html)
+
+
+
+
+
+
+
+
+
