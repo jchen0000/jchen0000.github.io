@@ -1,0 +1,77 @@
+---
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r}
+library(tidyverse)
+library(p8105.datasets)
+library(dplyr)
+library(tidyr)
+library(plotly)
+library(ggridges)
+library(httr)
+library(jsonlite)
+library(flexdashboard)
+```
+
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+data("instacart")
+
+instacart_department =
+  count(instacart, department) %>% 
+  arrange(n) %>% 
+  mutate(
+    department = factor(department, levels = department)
+  )
+
+instacart_department %>% 
+  plot_ly(x = ~n, y = ~department, color = ~department, type = "bar", colors = "viridis")
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+instacart_aisle = count(instacart, aisle) %>% 
+  filter(n > 10000) %>% 
+  arrange(n) %>% 
+  mutate(
+    aisle = factor(aisle, levels = aisle)
+  )
+
+instacart_aisle %>% 
+  plot_ly(x = ~n, y = ~aisle, color = ~aisle, alpha = .5,
+    type = "scatter", mode = "markers"
+  )
+```
+
+### Chart C
+
+```{r}
+data("rest_inspec")
+
+rest_inspec %>% 
+  filter(grade %in% c("A", "B", "C"), boro != "Missing") %>% 
+  mutate(boro = str_to_title(boro)) %>% 
+  filter(str_detect(dba, regex("pizza", ignore_case = TRUE))) %>%
+  mutate(
+    boro = fct_infreq(boro),
+    boro = fct_recode(boro)) %>% 
+  plot_ly(
+    x = ~boro, y = ~score, color = ~boro, 
+    type = "box", colors = "viridis"
+  )
+```

@@ -22,9 +22,10 @@ I’m currently a first-year student in MS biostatistics program on theory and m
 
 
 # Academic and Professional Experience
-[Resume](Resume.html)
+[Resume](About.html)
 
-
+# Dashboard Link
+[Dashboard](Dashboard.html)
 
 
 
