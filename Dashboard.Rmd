@@ -27,14 +27,14 @@ Column {data-width=650}
 ```{r}
 data("instacart")
 
-instacart_department =
+instacart_1 =
   count(instacart, department) %>% 
   arrange(n) %>% 
   mutate(
     department = factor(department, levels = department)
   )
 
-instacart_department %>% 
+instacart_1 %>% 
   plot_ly(x = ~n, y = ~department, color = ~department, type = "bar", colors = "viridis")
 ```
 
@@ -45,15 +45,19 @@ Column {data-width=350}
 
 ```{r}
 
-instacart_aisle = count(instacart, aisle) %>% 
-  filter(n > 10000) %>% 
-  arrange(n) %>% 
+instacart_2 = instacart %>% 
+  filter( department == "dairy eggs") %>%
+  mutate(department = str_to_title(department)) %>% 
   mutate(
-    aisle = factor(aisle, levels = aisle)
-  )
+    department = fct_infreq(department),
+    department = fct_recode(department)) 
+ # group_by(aisle, days_since_prior_orde) %>% 
+ #  summarize(n_obs = n())
 
-instacart_aisle %>% 
-  plot_ly(x = ~n, y = ~aisle, color = ~aisle, alpha = .5,
+ # select(department, order_number, days_since_prior_order)
+
+instacart_2 %>% 
+  plot_ly(x = ~aisle, y = ~days_since_prior_order, color = ~department, alpha = .5,
     type = "scatter", mode = "markers"
   )
 ```
@@ -61,17 +65,29 @@ instacart_aisle %>%
 ### Chart C
 
 ```{r}
-data("rest_inspec")
+data("instacart")
 
-rest_inspec %>% 
-  filter(grade %in% c("A", "B", "C"), boro != "Missing") %>% 
-  mutate(boro = str_to_title(boro)) %>% 
-  filter(str_detect(dba, regex("pizza", ignore_case = TRUE))) %>%
+instacart_3 = instacart %>% 
+  mutate(department = str_to_title(department)) %>% 
   mutate(
-    boro = fct_infreq(boro),
-    boro = fct_recode(boro)) %>% 
+    department = fct_infreq(department),
+    department = fct_recode(department)) 
+  
+
+instacart_3 %>% 
   plot_ly(
-    x = ~boro, y = ~score, color = ~boro, 
-    type = "box", colors = "viridis"
+      x = ~department, y = ~order_hour_of_day, color = ~department,
+      type = "box", colors = "viridis"
+    ) 
+```
+
+```{r}
+instacart_4 =
+  count(instacart, aisle) %>% 
+  arrange(n) %>% 
+  mutate(
+    department = factor(department, levels = department)
   )
 ```
+
+
