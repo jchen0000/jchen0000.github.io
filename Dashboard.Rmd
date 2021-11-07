@@ -47,7 +47,7 @@ Column {data-width=350}
 ```{r}
 
 instacart_2 = instacart %>% 
-  filter( department == "dairy eggs") %>%
+  filter(department == "bakery") %>%
   mutate(department = str_to_title(department)) %>% 
   mutate(
     department = fct_infreq(department),
@@ -77,7 +77,7 @@ instacart_3 = instacart %>%
 
 instacart_3 %>% 
   plot_ly(
-      x = ~department, y = ~days_since_prior_order, color = ~department,
+      x = ~department, y = ~order_hour_of_day, color = ~department,
       type = "box", colors = "viridis"
     ) 
 ```
