@@ -29,6 +29,7 @@ data("instacart")
 
 instacart_1 =
   count(instacart, department) %>% 
+  filter(department != "missing") %>% 
   arrange(n) %>% 
   mutate(
     department = factor(department, levels = department)
@@ -51,16 +52,15 @@ instacart_2 = instacart %>%
   mutate(
     department = fct_infreq(department),
     department = fct_recode(department)) 
- # group_by(aisle, days_since_prior_orde) %>% 
- #  summarize(n_obs = n())
-
- # select(department, order_number, days_since_prior_order)
+ 
 
 instacart_2 %>% 
-  plot_ly(x = ~aisle, y = ~days_since_prior_order, color = ~department, alpha = .5,
+  plot_ly(x = ~aisle, y = ~add_to_cart_order, color = ~aisle, alpha = .5,
     type = "scatter", mode = "markers"
   )
 ```
+
+
 
 ### Chart C
 
@@ -68,7 +68,7 @@ instacart_2 %>%
 data("instacart")
 
 instacart_3 = instacart %>% 
-  filter(department != Missing) %>% 
+  filter(department != "missing") %>% 
   mutate(department = str_to_title(department)) %>% 
   mutate(
     department = fct_infreq(department),
@@ -81,14 +81,4 @@ instacart_3 %>%
       type = "box", colors = "viridis"
     ) 
 ```
-
-```{r}
-# instacart_4 =
-#   count(instacart, aisle) %>% 
-#   arrange(n) %>% 
-#   mutate(
-#     department = factor(department, levels = department)
-#   )
-```
-
 
